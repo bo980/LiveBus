@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
-
+    private val executors = Executors.newSingleThreadExecutor()
     private var started = false
     private var progresss = 0
     private var status = "等待中..."
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         started = true
-        Executors.newSingleThreadExecutor().submit {
+        executors.submit {
             while (started && progresss < 100) {
                 progresss++
                 downLoad.status = DownLoad.downLoading
